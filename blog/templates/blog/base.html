@@ -1,0 +1,265 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="renderer" content="webkit">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link href="{% static 'blog/style.min.css' %}" rel="stylesheet">
+  <title>My test page</title>
+</head>
+<body class="bg-grey" gtools_scp_screen_capture_injected="true">
+
+<!--[if lt IE 8]>
+  <div class="browsehappy" role="dialog">
+    当前网页 <strong>不支持</strong> 你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/" target="_blank">升级你的浏览器</a>。
+  </div>
+  <![endif]-->
+
+<header id="header" class="header bg-white">
+  <div class="navbar-container">
+    <a href="https://yoyling.com/" class="navbar-logo">
+      <img src="https://yoyling.com/usr/themes/pinghsu/images/logo.png" alt="YOYLING · 左耳风笙"/>
+    </a>
+    <div class="navbar-menu">
+
+      <div>
+        <a>分类</a>
+        <ul>
+          {% for category in category_list %}
+            <li><a href="{% url 'category' category.id %}">{{ category.name }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      {% for navbarmenu in navbarmenu_list %}
+        <a href="{{ navbarmenu.url }}">{{ navbarmenu.name }}</a>
+      {% endfor %}
+    </div>
+
+    <div class="navbar-search" onclick="">
+      <span class="icon-search"></span>
+      <form id="search" method="post" action="http://139.9.201.209/" role="search">
+                <span class="search-box">
+                    <input type="text" id="input" class="input" name="s" required="true" placeholder="Search..."
+                           maxlength="30" autocomplete="off">
+                </span>
+      </form>
+    </div>
+
+    <div class="navbar-mobile-menu" id="navbar-mobile-swith" onclick="">
+      <span class="icon-menu cross"><span class="middle"></span></span>
+      <ul>
+        <!--分类-->
+        <li class="navbar-menu-categorys">
+          <a>分类</a>
+          <ul>
+            {% for category in category_list %}
+              <li><a href="{% url 'category' category.id %}">{{ category.name }}</a></li>
+            {% endfor %}
+          </ul>
+        </li>
+
+
+        {% for navbarmenu in navbarmenu_list %}
+          <li><a href="{{ navbarmenu.url }}">{{ navbarmenu.name }}</a></li>
+        {% endfor %}
+
+      </ul>
+    </div>
+  </div>
+</header>
+
+{% block body %}
+{% endblock body%}
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<footer id="footer" class="footer bg-white">
+  <div class="footer-social">
+    <!--返回顶部-->
+    <div class="footer-container clearfix">
+      <div class="social-list">
+        <a class="social weibo" target="blank" href="https://weibo.com/u/5722118255">WEIBO</a>
+        <a class="social zhihu" target="blank" href="https://www.zhihu.com/people/chen-shuang-quan-70-21/activities">ZHIHU</a>
+        <a class="social rss" target="blank" href="https://yoyling.com/feed/">RSS</a>
+        <a class="social github" target="blank" href="https://github.com/yoyling">GITHUB</a>
+        <a class="social twitter" target="blank" href="https://twitter.com/yoyling_com">TWITTER</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-meta">
+    <div class="footer-container">
+      <div class="meta-item meta-copyright">
+        <div class="meta-copyright-info">
+          <a href="https://yoyling.com/" class="info-logo">
+            <img src="https://yoyling.com/usr/themes/pinghsu/images/logo-hsuping.png" alt="YOYLING · 左耳风笙"/>
+          </a>
+          <div class="info-text">
+            <p id="yephy"></p>
+
+
+            <p>Welcome to <a href="https://yoyling.com" target="_blank" rel="nofollow">yoyling.com</a></p>
+            <p>&copy; 2019 <a href="https://yoyling.com/">YOYLING · 左耳风笙</a></p>
+
+
+            <p><a href="http://www.miitbeian.gov.cn/" target="_blank" rel="nofollow">闽ICP备18008354号-1</a></p>
+            <p>已在世界的角落里存活了<b>
+              <script language="JavaScript" type="text/javascript"> var urodz = new Date("04/10/2018");
+              var now = new Date();
+              var ile = now.getTime() - urodz.getTime();
+              var dni = Math.floor(ile / (1000 * 60 * 60 * 24));
+              document.write(+dni) </script>
+            </b> 天
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="meta-item meta-posts">
+        <h3 class="meta-title">最新文章</h3>
+        {% for recent_post in recent_post_list %}
+          <li><a href="{% url 'post' recent_post.id %}">{{ recent_post.title }}</a></li>
+        {% endfor %}
+      </div>
+      <div class="meta-item meta-comments">
+        <h3 class="meta-title">最新评论</h3>
+        {% for recent_comment in recent_comment_list %}
+          <li><a href="{% url 'post' recent_comment.post.id %}">{{ recent_comment.body }}</a></li>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<script src="//cdn.bootcss.com/headroom/0.9.1/headroom.min.js"></script>
+<script type="text/javascript" src="{% static 'blog/jquery.js' %}"></script>
+<script type="text/javascript" src="{% static 'blog/gotoTop.js' %}"></script>
+<script type="text/javascript" src="{% static 'blog/commentTyping.js' %}"></script>
+
+<script>
+    var header = new Headroom(document.getElementById("header"), {
+        tolerance: 0,
+        offset: 70,
+        classes: {
+            initial: "animated",
+            pinned: "slideDown",
+            unpinned: "slideUp"
+        }
+    });
+    header.init();
+    //修正onclick
+    //***********************************
+    var navbarSwith = document.getElementById("navbar-mobile-swith");
+    navbarSwith.onclick = function () {
+        navbarSwith.classList.toggle("navbar-mobile-menu-on");
+    };
+    //***********************************
+
+    if ('addEventListener' in document) {
+        document.addEventListener('DOMContentLoaded', function () {
+            FastClick.attach(document.body);
+        }, false);
+    }
+</script>
+
+<!--彩色打字机-->
+<script>
+    var yephy = function (r) {
+        function t() {
+            return b[Math.floor(Math.random() * b.length)]
+        }
+
+        function e() {
+            return String.fromCharCode(94 * Math.random() + 33)
+        }
+
+        function n(r) {
+            for (var n = document.createDocumentFragment(), i = 0; r > i; i++) {
+                var l = document.createElement("span");
+                l.textContent = e(), l.style.color = t(), n.appendChild(l)
+            }
+            return n
+        }
+
+        function i() {
+            var t = o[c.skillI];
+            c.step ? c.step-- : (c.step = g, c.prefixP < l.length ? (c.prefixP >= 0 && (c.text += l[c.prefixP]), c.prefixP++) : "forward" === c.direction ? c.skillP < t.length ? (c.text += t[c.skillP], c.skillP++) : c.delay ? c.delay-- : (c.direction = "backward", c.delay = a) : c.skillP > 0 ? (c.text = c.text.slice(0, -1), c.skillP--) : (c.skillI = (c.skillI + 1) % o.length, c.direction = "forward")), r.textContent = c.text, r.appendChild(n(c.prefixP < l.length ? Math.min(s, s + c.prefixP) : Math.min(s, t.length - c.skillP))), setTimeout(i, d)
+        }
+
+        var l = "I work with ",
+            o = ["Front-End", "JavaScript", "HTML & CSS", "Node.js", "React", "passion & love"].map(function (r) {
+                return r + "."
+            }),
+            a = 2,
+            g = 1,
+            s = 5,
+            d = 75,
+            b = ["rgb(110,64,170)", "rgb(150,61,179)", "rgb(191,60,175)", "rgb(228,65,157)", "rgb(254,75,131)", "rgb(255,94,99)", "rgb(255,120,71)", "rgb(251,150,51)", "rgb(226,183,47)", "rgb(198,214,60)", "rgb(175,240,91)", "rgb(127,246,88)", "rgb(82,246,103)", "rgb(48,239,130)", "rgb(29,223,163)", "rgb(26,199,194)", "rgb(35,171,216)", "rgb(54,140,225)", "rgb(76,110,219)", "rgb(96,84,200)"],
+            c = {
+                text: "",
+                prefixP: -s,
+                skillI: 0,
+                skillP: 0,
+                direction: "forward",
+                delay: a,
+                step: g
+            };
+        i()
+    };
+    yephy(document.getElementById('yephy'));
+</script>
+
+</body>
+</html>

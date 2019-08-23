@@ -1,0 +1,68 @@
+{% extends "blog/base.html" %}
+
+{% block body %}
+
+  <div class="main-content index-page clearfix onelist-page">
+    <div class="post-lists">
+      <div class="post-lists-body">
+
+
+        <div class="post-onelist-item">
+          <div class="post-onelist-item-container">
+            <a href="https://yoyling.com/">
+              <div class="onelist-item-thumb bg-deepgrey"
+                   style="background-image:url(https://yoyling.oss-cn-shenzhen.aliyuncs.com/Game-of-Thrones.jpg);">
+              </div>
+            </a>
+            <div class="onelist-item-info">
+              <div class="item-title">
+                <a href="https://yoyling.com/">YOYLING · 左耳风笙</a>
+              </div>
+              <div class="item-meta" style="font-size: 15px">
+                <p>
+                  大道至简 大简至极 </p>
+              </div>
+              <div class="item-meta" style="font-size: 15px">
+                <div class="social-list">
+                  <a href="https://file.yoyling.com" target="_blank">FILE </a>&nbsp丨
+                  <a href="https://use.yoyling.com" target="_blank">LINK </a>&nbsp丨
+                  <a href="http://aqstream.com/news/cbsn/CBSN" target="_blank">CBSN </a>&nbsp丨
+                  <a href="https://c.yoyling.com" target="_blank">CPP </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {% for post in post_list %}
+          <div class="post-onelist-item">
+            <div class="post-onelist-item-container">
+              <a href="{% url 'post' post.id %}">
+                <div class="onelist-item-thumb  bg-blue"
+                     style="background-image:url({{ post.thumb_url }});"></div>
+              </a>
+              <div class="onelist-item-info">
+                <div class="item-title">
+                  <a href="{% url 'post' post.id %}">{{ post.title }}</a>
+                </div>
+                <div class="item-meta">
+                  <time datetime="2019-05-27T18:46:00+08:00" itemprop="datePublished">发布时间:{{ post.published_time }}</time>
+                  | 分类:<a href="{% url 'category' post.category.id %}">{{ post.category.name }}</a>
+                </div>
+                <div class="item-meta-hr  bg-green"></div>
+                <div class="item-content">
+                  <p>{{ post.digest }}</p>
+                </div>
+                <div class="item-readmore">
+                  <a href="{% url 'post' post.id %}"> 继续阅读 → </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+
+      </div>
+    </div>
+  </div>
+
+{% endblock body %}

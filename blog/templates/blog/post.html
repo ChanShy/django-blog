@@ -1,0 +1,30 @@
+{% extends "blog/base.html" %}
+
+{% block body %}
+  <div class="post-header-thumb  bg-orange">
+    <div class="post-header-thumb-op"
+         style="background-image:url({{ post.thumb_url }});"></div>
+    <div class="post-header-thumb-cover">
+      <div class="post-header-thumb-container">
+        <div class="post-header-thumb-title">
+          {{ post.title }}
+        </div>
+        <div class="post-header-thumb-meta">
+          <time datetime="2019-05-27T18:46:00+08:00" itemprop="datePublished">发布时间:{{ post.published_time }}</time>
+          &nbsp;&nbsp;|&nbsp;&nbsp; 分类:<a href="{% url 'category' post.category.id %}">{{ post.category.name }}</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+          评论数: <a href="#comments">{{ post.comment.all|length }}</a>
+        </div>
+        <div class="post-tags"> <!-- 标签用的，有用-->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <article class="main-content post-page" itemscope itemtype="http://schema.org/Article">
+    <div id="post-content" class="post-content" itemprop="articleBody">
+      {{ post.body|safe }}
+    </div>
+  </article>
+
+  <link href="//cdn.bootcss.com/highlight.js/9.10.0/styles/xcode.min.css" rel="stylesheet">
+{% endblock body %}
