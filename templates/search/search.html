@@ -1,0 +1,72 @@
+{% extends 'blog/base.html' %}
+
+{% block body %}
+
+  <div class="search-page">
+    <div class="search-page-limit">
+      <form id="search" class="search-form" method="get" action="/search" role="search">
+            <span class="search-box clearfix">
+                <input type="text" id="input" class="input" name="q" required="true" placeholder="Search..."
+                       maxlength="30" autocomplete="off">
+                <button type="submit" class="spsubmit"><i class="icon-search"></i></button>
+            </span>
+      </form>
+      <div class="search-tags">
+        {% for tag in tag_list %}
+          <a href="{% url 'tag' tag.name %}">{{ tag.name }}({{ tag.post_set.all|length }})</a>
+        {% endfor %}
+        <div class="search-tags-hr  bg-yellow"></div>
+      </div>
+    </div>
+
+
+    <div class="main-content common-page clearfix">
+      <div class="common-item">
+        <div class="post-lists">
+          <div class="post-lists-body">
+            {% if query %}
+              {% for result in page.object_list %}
+
+                <div class="post-list-item">
+                  <div class="post-list-item-container  bg-orange">
+                    <div class="item-label  bg-red">
+                      <div class="item-title"><a href="{% url 'post' result.object.id %}">{{ result.object.title }}</a>
+                      </div>
+                      <div class="item-meta clearfix">
+                        <div class="item-meta-ico bg-ico-web"
+                             style="background: url(https://yoyling.com/usr/themes/pinghsu/images/bg-ico.png) no-repeat;background-size: 40px auto;"></div>
+                        <div class="item-meta-date">{{ result.object.published_time }}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+              {% empty %}
+                <p>哎呀，没有找到结果，要不换个词再试试？</p>
+              {% endfor %}
+
+              {% if page.has_previous or page.has_next %}
+                <div>
+                  {% if page.has_previous %}<a href="?q={{ query }}&page={{ page.previous_page_number }}">{% endif %}«
+                  Previous
+                  {% if page.has_previous %}</a>{% endif %}
+                  |
+                  {% if page.has_next %}<a href="?q={{ query }}&page={{ page.next_page_number }}">{% endif %}Next »
+                  {% if page.has_next %}</a>{% endif %}
+                </div>
+              {% endif %}
+
+            {% else %}
+              {# Show some example queries to run, maybe query syntax, something else? #}
+            {% endif %}
+          </div>
+
+        </div>
+      </div>
+      <div class="lists-navigator clearfix">
+      </div>
+    </div>
+  </div>
+
+{% endblock body %}

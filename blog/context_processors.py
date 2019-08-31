@@ -1,4 +1,4 @@
-from .models import Category, Navbarmenu, Post, Comment
+from .models import Category, Navbarmenu, Post, Comment, Tag
 
 
 def base(request):
@@ -15,4 +15,10 @@ def base(request):
         'recent_comment_list': recent_comment_list,
         'category_list': category_list,
         'navbarmenu_list': navbarmenu_list
+    }
+
+def search(request):
+    tag_list = Tag.objects.all()
+    return {
+        'tag_list': tag_list
     }

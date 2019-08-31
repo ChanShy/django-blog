@@ -5,8 +5,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="renderer" content="webkit">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <link href="{% static 'blog/style.min.css' %}" rel="stylesheet">
+  <link rel="shortcut icon" href="{% static 'blog/images/ico.png' %}">
   <title>My test page</title>
 </head>
 <body class="bg-grey" gtools_scp_screen_capture_injected="true">
@@ -19,8 +21,8 @@
 
 <header id="header" class="header bg-white">
   <div class="navbar-container">
-    <a href="https://yoyling.com/" class="navbar-logo">
-      <img src="https://yoyling.com/usr/themes/pinghsu/images/logo.png" alt="YOYLING · 左耳风笙"/>
+    <a href="{% url 'index' %}" class="navbar-logo">
+      <img src="{% static 'blog/images/chanshy.png' %}" alt="CHAN SHY"/>
     </a>
     <div class="navbar-menu">
 
@@ -28,7 +30,7 @@
         <a>分类</a>
         <ul>
           {% for category in category_list %}
-            <li><a href="{% url 'category' category.id %}">{{ category.name }}</a></li>
+            <li><a href="{% url 'category' category.name %}">{{ category.name }}</a></li>
           {% endfor %}
         </ul>
       </div>
@@ -40,9 +42,9 @@
 
     <div class="navbar-search" onclick="">
       <span class="icon-search"></span>
-      <form id="search" method="post" action="http://139.9.201.209/" role="search">
+      <form id="search" method="get" action="/search" role="search">
                 <span class="search-box">
-                    <input type="text" id="input" class="input" name="s" required="true" placeholder="Search..."
+                    <input type="text" id="input" class="input" name="q" required="true" placeholder="Search..."
                            maxlength="30" autocomplete="off">
                 </span>
       </form>
@@ -56,7 +58,7 @@
           <a>分类</a>
           <ul>
             {% for category in category_list %}
-              <li><a href="{% url 'category' category.id %}">{{ category.name }}</a></li>
+              <li><a href="{% url 'category' category.name %}">{{ category.name }}</a></li>
             {% endfor %}
           </ul>
         </li>
@@ -72,91 +74,23 @@
 </header>
 
 {% block body %}
-{% endblock body%}
-
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+{% endblock body %}
 
 <footer id="footer" class="footer bg-white">
-  <div class="footer-social">
-    <!--返回顶部-->
-    <div class="footer-container clearfix">
-      <div class="social-list">
-        <a class="social weibo" target="blank" href="https://weibo.com/u/5722118255">WEIBO</a>
-        <a class="social zhihu" target="blank" href="https://www.zhihu.com/people/chen-shuang-quan-70-21/activities">ZHIHU</a>
-        <a class="social rss" target="blank" href="https://yoyling.com/feed/">RSS</a>
-        <a class="social github" target="blank" href="https://github.com/yoyling">GITHUB</a>
-        <a class="social twitter" target="blank" href="https://twitter.com/yoyling_com">TWITTER</a>
-      </div>
-    </div>
-  </div>
   <div class="footer-meta">
     <div class="footer-container">
       <div class="meta-item meta-copyright">
         <div class="meta-copyright-info">
-          <a href="https://yoyling.com/" class="info-logo">
-            <img src="https://yoyling.com/usr/themes/pinghsu/images/logo-hsuping.png" alt="YOYLING · 左耳风笙"/>
+          <a href="{% url 'index' %}" class="info-logo">
+            <img src="{% static 'blog/images/chanshy.png' %}" alt="CHAN SHY"/>
           </a>
           <div class="info-text">
             <p id="yephy"></p>
 
 
-            <p>Welcome to <a href="https://yoyling.com" target="_blank" rel="nofollow">yoyling.com</a></p>
-            <p>&copy; 2019 <a href="https://yoyling.com/">YOYLING · 左耳风笙</a></p>
-
-
             <p><a href="http://www.miitbeian.gov.cn/" target="_blank" rel="nofollow">闽ICP备18008354号-1</a></p>
             <p>已在世界的角落里存活了<b>
-              <script language="JavaScript" type="text/javascript"> var urodz = new Date("04/10/2018");
+              <script language="JavaScript" type="text/javascript"> var urodz = new Date("08/23/2019");
               var now = new Date();
               var ile = now.getTime() - urodz.getTime();
               var dni = Math.floor(ile / (1000 * 60 * 60 * 24));
@@ -182,11 +116,48 @@
   </div>
 </footer>
 
+{% block after_footer %}
+
+{% endblock after_footer %}
 
 <script src="//cdn.bootcss.com/headroom/0.9.1/headroom.min.js"></script>
-<script type="text/javascript" src="{% static 'blog/jquery.js' %}"></script>
-<script type="text/javascript" src="{% static 'blog/gotoTop.js' %}"></script>
-<script type="text/javascript" src="{% static 'blog/commentTyping.js' %}"></script>
+<script src="//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+
+<script>
+    var postDirectory = new Headroom(document.getElementById("directory-content"), {
+        tolerance: 0,
+        offset: 280, classes: {
+            initial: "initial",
+            pinned: "pinned",
+            unpinned: "unpinned"
+        }
+    });
+    postDirectory.init();
+
+    var header = new Headroom(document.getElementById("header"), {
+        tolerance: 0,
+        offset: 70,
+        classes: {
+            initial: "animated",
+            pinned: "slideDown",
+            unpinned: "slideUp"
+        }
+    });
+    header.init();
+    //修正onclick
+    //***********************************
+    var navbarSwith = document.getElementById("navbar-mobile-swith");
+    navbarSwith.onclick = function () {
+        navbarSwith.classList.toggle("navbar-mobile-menu-on");
+    };
+    //***********************************
+
+    if ('addEventListener' in document) {
+        document.addEventListener('DOMContentLoaded', function () {
+            FastClick.attach(document.body);
+        }, false);
+    }
+</script>
 
 <script>
     var header = new Headroom(document.getElementById("header"), {
@@ -213,6 +184,7 @@
         }, false);
     }
 </script>
+
 
 <!--彩色打字机-->
 <script>
@@ -260,6 +232,10 @@
     };
     yephy(document.getElementById('yephy'));
 </script>
+
+<script type="text/javascript" src="{% static 'blog/jquery.js' %}"></script>
+<script type="text/javascript" src="{% static 'blog/gotoTop.js' %}"></script>
+<script type="text/javascript" src="{% static 'blog/commentTyping.js' %}"></script>
 
 </body>
 </html>

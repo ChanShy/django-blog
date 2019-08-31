@@ -36,9 +36,6 @@ class Category(models.Model):
         verbose_name = '分类'
         verbose_name_plural = '分类'
 
-    def get_absolute_url(self):
-        return reverse('blog:category', kwargs={'pk': self.pk})
-
     def __str__(self):
         return self.name
 
@@ -58,11 +55,10 @@ class Comment(models.Model):
     body = models.TextField('评论')
     published_time = models.DateTimeField('发布时间', auto_now_add=True)
     author = models.CharField('评论人名字', max_length=128)
-    author_url = models.URLField('评论人url')
+    author_url = models.URLField('评论人url', blank=True)
     author_mail = models.EmailField('评论人邮箱')
     parent_comment = models.ForeignKey('self', verbose_name='上级评论', blank=True, null=True, on_delete=models.CASCADE)
     post = models.ForeignKey('Post', verbose_name='评论的文章', on_delete=models.CASCADE)
-    digest = models.CharField('摘要', blank=True, max_length=300)
 
     class Meta:
         verbose_name = '评论'
@@ -74,16 +70,16 @@ class Comment(models.Model):
 
 class Post(models.Model):
     title = models.CharField('标题', max_length=128)
+    category = models.ForeignKey('Category', verbose_name='分类', on_delete=models.CASCADE)
+    tags = models.ManyToManyField(Tag, verbose_name='文章标签', blank=True)
+    allow_comment = models.BooleanField('允许评论', default=True)
+    thumb_url = models.URLField('头图url', blank=True)
+    excerpt = models.TextField('摘要', max_length=256, blank=True)
     body = MDTextField('正文')
     password = models.CharField('密码', max_length=256, blank=True)
     published_time = models.DateTimeField('发布时间', auto_now_add=True)
     modified_time = models.DateTimeField('修改时间', auto_now=True)
     views = models.PositiveIntegerField('浏览量', default=0)
-    excerpt = models.CharField('摘要', max_length=256, blank=True)
-    category = models.ForeignKey('Category', verbose_name='分类', on_delete=models.CASCADE)
-    tags = models.ManyToManyField(Tag, verbose_name='文章标签', blank=True)
-    allow_comment = models.BooleanField(default=True)
-    thumb_url = models.URLField('头图url',blank=True)
 
     class Meta:
         verbose_name = '文章'
